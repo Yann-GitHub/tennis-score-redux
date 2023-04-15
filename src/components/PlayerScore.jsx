@@ -1,19 +1,27 @@
 import { useSelector } from "react-redux"
-import { selectPlayerHasAdvantage } from "./selectors";
-import { selectPlayerScore } from "./selectors";
-import { selectPointBeforeWin } from "./selectors"
+import {
+    selectPlayerHasAdvantage,
+    selectPlayerScore,
+    selectPointBeforeWin,
+} from "../selectors";
 
-// const selectPlayerHasAdvantage =(playerId) => {
-//     return (state) => state.advantage === playerId
-// };
+/**
+ * Component that displays a player's score and other related information.
+ *
+ * @param {Object} props - The props object that contains playerId and playerName.
+ * @param {string} props.playerId - The id of the player whose score is being displayed.
+ * @param {string} props.playerName - The name of the player whose score is being displayed.
+ * @returns {JSX.Element} - The PlayerScore component.
+ */
 
 function PlayerScore({ playerId, playerName}) {
-    // const score = useSelector(state => state[playerId]);
+
     const score = useSelector(selectPlayerScore(playerId));
     const hasAdvantage = useSelector(selectPlayerHasAdvantage(playerId))
     const pointsBeforeWin = useSelector(selectPointBeforeWin(playerId))
 
-    return <div className="player-score">
+    return (
+    <div className="player-score">
         <p>
             {playerName}
             {pointsBeforeWin === null
@@ -24,6 +32,7 @@ function PlayerScore({ playerId, playerName}) {
             </p>
         <p>{(hasAdvantage ? "advantage " : "") + score}</p>
     </div>
+    );
 }
 
 export default PlayerScore

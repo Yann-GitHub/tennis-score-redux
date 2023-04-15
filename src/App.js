@@ -1,9 +1,9 @@
-import  PlayPauseButton  from "./PlayPauseButton";
-import  Display  from "./Display";
-import  PointScoredButton from "./PointScoredButton"
-import  ResetButton from "./ResetButton"
-import  PlayerScore from "./PlayerScore";
-import  PlayerPoints from "./PlayPoints";
+import  PlayPauseButton  from "./components/PlayPauseButton";
+import  Display  from "./components/Display";
+import  PointScoredButton from "./components/PointScoredButton"
+import  ResetButton from "./components/ResetButton"
+import  PlayerScore from "./components/PlayerScore";
+import  PlayerPoints from "./components/PlayPoints";
 
 function App() {
   return (

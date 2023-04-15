@@ -1,8 +1,12 @@
-
 import { useStore, useSelector } from 'react-redux';
-import { autoPlay } from './store';
-import { selectGameIsPlaying } from './selectors';
+import { autoPlay } from '../store';
+import { selectGameIsPlaying } from '../selectors';
 
+/**
+ * Component that renders a button that starts or stops the game
+ *
+ * @returns {JSX.Element} - A button element that starts or stops the game.
+ */
  
 function PlayPauseButton() {
 
@@ -13,9 +17,9 @@ function PlayPauseButton() {
  
   return (
   <button
-  className='button'
-  onClick={() => {
-    autoPlay(store)
+    className='button'
+    onClick={() => {
+      autoPlay(store)
   }}
   >
     {playing ? "Jeu en cours..." : "Jouer"}

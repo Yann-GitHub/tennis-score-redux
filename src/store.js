@@ -1,8 +1,11 @@
 // import { createStore } from 'redux' (deprecated)
 import { legacy_createStore as createStore} from 'redux'
 import produce from 'immer';
+import { setPlaying, pointScored } from './actions';
+import ACTIONS from './actionTypes';
 
-// state
+
+// State
 const initialState = {
     player1: 0,
     player2: 0,
@@ -14,17 +17,7 @@ const initialState = {
       // { player1: 15, player2: 40, winner: "player2" }
     ],
   };
-  
-  // actions creators
-  
-  export const setPlaying = (playing) => ({ type: "setPlaying", payload: playing });
-  
-  export const restartGame = () => ({ type: "restart" });
-  
-  export const pointScored = (player) => ({
-    type: "pointScored",
-    payload: { player: player },
-  });
+
 
   export function autoPlay(store) {
     const isPlaying = store.getState().playing;
@@ -56,8 +49,10 @@ const initialState = {
     }
   }
   
+
+  // Reducer function
   function reducer(state = initialState, action) {
-    if (action.type === "restart") {
+    if (action.type === ACTIONS.RESTART) {
       return produce(state, (draft) => {
         // si le match est terminé, on ajoute un élément à l'historique
         if (draft.winner) {
@@ -75,7 +70,7 @@ const initialState = {
         draft.playing = false;
       });
     }
-    if (action.type === "setPlaying") {
+    if (action.type === ACTIONS.SET_PLAYING) {
       if (state.winner) {
         return state;
       }
@@ -83,7 +78,7 @@ const initialState = {
         draft.playing = action.payload;
       });
     }
-    if (action.type === "pointScored") {
+    if (action.type === ACTIONS.POINT_SCORED) {
       const player = action.payload.player;
       const otherPlayer = player === "player1" ? "player2" : "player1";
       if (state.winner) {
@@ -133,7 +128,7 @@ const initialState = {
   export const store = createStore(reducer);
   
   
-  // A chaque changement du store des console.log() sont réalisés.
+  // A chaque modification du state, le nouveau state s'affiche dans la console
   store.subscribe(() => {
     console.log("Nouveau state:");
     console.log(store.getState());
